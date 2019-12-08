@@ -2,11 +2,11 @@ digraph fullGraph {
 	nodesep=1;
 	rankdir=TB;
 	ranksep="1.5 equally";
-	Node_0xc0001ba460:Node_0xc0001ba460:anchor->Node_0xc0001ba2a0:Node_0xc0001ba2a0:anchor[ labelfloat=false, taillabel=" 0 " ];
-	Node_0xc0001ba460:Node_0xc0001ba460:anchor->Node_0xc0001ba380:Node_0xc0001ba380:anchor[ labelfloat=false, taillabel=" 1 " ];
-	Node_0xc0001ba540->Node_0xc0001ba460[ constraint=false, style=dashed, weight=999 ];
-	Node_0xc0001ba540->Node_0xc0001ba380[ constraint=false, style=dashed, weight=999 ];
-	Node_0xc0001ba540->Node_0xc0001ba2a0[ constraint=false, style=dashed, weight=999 ];
+	Node_0xc0000b3340:Node_0xc0000b3340:anchor->Node_0xc0000b3180:Node_0xc0000b3180:anchor[ labelfloat=false, taillabel=" 0 " ];
+	Node_0xc0000b3340:Node_0xc0000b3340:anchor->Node_0xc0000b3260:Node_0xc0000b3260:anchor[ labelfloat=false, taillabel=" 1 " ];
+	Node_0xc0000b3420->Node_0xc0000b3340[ constraint=false, style=dashed, weight=999 ];
+	Node_0xc0000b3420->Node_0xc0000b3260[ constraint=false, style=dashed, weight=999 ];
+	Node_0xc0000b3420->Node_0xc0000b3180[ constraint=false, style=dashed, weight=999 ];
 	outsideRoot->insideInputs[ constraint=false, style=invis, weight=999 ];
 	outsideConsts->insideConsts[ constraint=false, style=invis, weight=999 ];
 	outsideRoot->outsideConsts[ constraint=false, style=invis, weight=999 ];
@@ -16,7 +16,7 @@ digraph fullGraph {
 	insideConsts->insideExprG[ constraint=false, style=invis, weight=999 ];
 	subgraph cluster_expressionGraph {
 	label=expressionGraph;
-	Node_0xc0001ba460 [ fontname=monospace, label=<
+	Node_0xc0000b3340 [ fontname=monospace, label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" PORT="anchor"  COLOR="#FF0000;" >
 
 <TR><TD>2</TD><TD>+ false(%0, %1) :: float64</TD></TR>
@@ -25,7 +25,7 @@ digraph fullGraph {
 <TR><TD>Overwrites Input -1</TD><TD>Data On: CPU</TD></TR>
 <TR><TD>Value</TD><TD>Grad</TD></TR>
 <TR><TD>float64 4.5</TD><TD>float64   1 </TD></TR>
-<TR><TD>Ptr: 0x824635221472x </TD><TD>Ptr: 0xc00012b688 </TD></TR>
+<TR><TD>Ptr: 0x824634932344x </TD><TD>Ptr: 0xc000127688 </TD></TR>
 
 
 </TABLE>
@@ -38,7 +38,7 @@ digraph fullGraph {
 	rank=max;
 	subgraph cluster_constants {
 	label=constants;
-	Node_0xc0001ba540 [ fontname=monospace, label=<
+	Node_0xc0000b3420 [ fontname=monospace, label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" PORT="anchor"  COLOR="#00FF00;">
 
 <TR><TD>3</TD><TD>1 :: float64</TD></TR>
@@ -57,7 +57,7 @@ digraph fullGraph {
 ;
 	subgraph cluster_inputs {
 	label=inputs;
-	Node_0xc0001ba2a0 [ fontname=monospace, label=<
+	Node_0xc0000b3180 [ fontname=monospace, label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" PORT="anchor"  COLOR="#00FF00;" BGCOLOR="lightyellow">
 
 <TR><TD>0</TD><TD>x :: float64</TD></TR>
@@ -66,12 +66,12 @@ digraph fullGraph {
 <TR><TD>Overwrites Input -1</TD><TD>Data On: CPU</TD></TR>
 <TR><TD>Value</TD><TD>Grad</TD></TR>
 <TR><TD>float64   2</TD><TD>float64   1 </TD></TR>
-<TR><TD>Ptr: 0x824635221368x </TD><TD>Ptr: 0xc00012b688 </TD></TR>
+<TR><TD>Ptr: 0x824634932304x </TD><TD>Ptr: 0xc000127688 </TD></TR>
 
 
 </TABLE>
 >, shape=none ];
-	Node_0xc0001ba380 [ fontname=monospace, label=<
+	Node_0xc0000b3260 [ fontname=monospace, label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" PORT="anchor"  COLOR="#00FF00;" BGCOLOR="lightyellow">
 
 <TR><TD>1</TD><TD>y :: float64</TD></TR>
@@ -80,7 +80,7 @@ digraph fullGraph {
 <TR><TD>Overwrites Input -1</TD><TD>Data On: CPU</TD></TR>
 <TR><TD>Value</TD><TD>Grad</TD></TR>
 <TR><TD>float64 2.5</TD><TD>float64   1 </TD></TR>
-<TR><TD>Ptr: 0x824635221440x </TD><TD>Ptr: 0xc00012b688 </TD></TR>
+<TR><TD>Ptr: 0x824634932312x </TD><TD>Ptr: 0xc000127688 </TD></TR>
 
 
 </TABLE>
