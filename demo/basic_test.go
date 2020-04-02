@@ -9,29 +9,6 @@ import (
 	. "gorgonia.org/gorgonia"
 )
 
-// Same graph is used for all tests.
-func makeGraph() (g *ExprGraph, z *Node) {
-	g = NewGraph()
-
-	var x, y *Node
-	var err error
-
-	// Define expression
-	x = NewScalar(g, Float64, WithName("x"))
-	y = NewScalar(g, Float64, WithName("y"))
-	z, err = Mul(x, y)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Set initial values and run
-	Let(x, 2.)
-	Let(y, 2.5)
-
-	return g, z
-}
-
 // TestBasic computes no gradient.
 func TestBasic(t *testing.T) {
 	var err error
@@ -62,7 +39,8 @@ func TestAutodiff(t *testing.T) {
 	g, z := makeGraph()
 	x, y := g.ByName("x")[0], g.ByName("y")[0]
 
-	// by default, LispMachine performs forward mode and backwards mode execution
+	// by default, LispMachine performs forward mode
+	// and backwards mode execution, computing all gradients.
 	m := NewLispMachine(g)
 	defer m.Close()
 	if err = m.RunAll(); err != nil {
@@ -83,7 +61,7 @@ func TestAutodiff(t *testing.T) {
 	ioutil.WriteFile("basic_autodiff.dot", []byte(g.ToDot()), 0644)
 }
 
-// testSymbolicDiff computes the requested gradients.
+// testSymbolicDiff computes the **requested** gradients.
 // tapeMachine is enough.
 func TestSymbolicDiff(t *testing.T) {
 	var err error
@@ -94,7 +72,7 @@ func TestSymbolicDiff(t *testing.T) {
 	// symbolically differentiate z with regards to x and y
 	// this adds the gradient nodes to the graph g
 	// grads is an array of the gradient wrt z
-	// Gradient call also be read directly from x ...
+	// Gradients call also be read directly from x ...
 	var grads Nodes
 	grads, err = Grad(z, x, y)
 	if err != nil {
@@ -111,24 +89,25 @@ func TestSymbolicDiff(t *testing.T) {
 
 	fmt.Printf("z: %v\n", z.Value())
 
-	xgrad, err := x.Grad() // xgrad access the gradient, IFF it was previously computed from grad()
+	// Reading gradient directly from the input values
+	// xgrad access the gradient, IFF it was previously computed from grad()
+	xgrad, err := x.Grad()
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("dz/dx: %v\n", xgrad)
-
-	// Check that direct access to grads gives the same value as above ...
-	if xg := grads[0].Value(); xg != xgrad {
-		fmt.Printf("dz/dx has different values %v and %v\n", xgrad, xg)
-		t.FailNow()
-	}
-
 	ygrad, err := y.Grad()
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("dz/dy: %v\n", ygrad)
 
+	// Check that direct access via the grads variable
+	// yields the same value as above ...
+	if xg := grads[0].Value(); xg != xgrad {
+		fmt.Printf("dz/dx has different values %v and %v\n", xgrad, xg)
+		t.FailNow()
+	}
 	if yg := grads[1].Value(); yg != ygrad {
 		fmt.Printf("dz/dy has different values %v and %v\n", ygrad, yg)
 		t.FailNow()
@@ -137,4 +116,29 @@ func TestSymbolicDiff(t *testing.T) {
 	// Writing graph as dot file
 	ioutil.WriteFile("basic_symbolicdiff.dot", []byte(g.ToDot()), 0644)
 
+}
+
+// ======================================================================
+
+// Same graph is used for all tests.
+func makeGraph() (g *ExprGraph, z *Node) {
+	g = NewGraph()
+
+	var x, y *Node
+	var err error
+
+	// Define expression
+	x = NewScalar(g, Float64, WithName("x"))
+	y = NewScalar(g, Float64, WithName("y"))
+	z, err = Mul(x, y)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Set initial values and run
+	Let(x, 2.)
+	Let(y, 2.5)
+
+	return g, z
 }
