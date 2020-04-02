@@ -52,7 +52,8 @@ func TestBasic(t *testing.T) {
 	ioutil.WriteFile("basic.dot", []byte(g.ToDot()), 0644)
 }
 
-// TestAutodiff showcases automatic differentiation, computes all possible gradients.
+// TestAutodiff showcases automatic differentiation,
+// computes all possible gradients.
 // Lisp machine is required.
 func TestAutodiff(t *testing.T) {
 
@@ -93,8 +94,9 @@ func TestSymbolicDiff(t *testing.T) {
 	// symbolically differentiate z with regards to x and y
 	// this adds the gradient nodes to the graph g
 	// grads is an array of the gradient wrt z
-	// var grads Nodes
-	_, err = Grad(z, x, y)
+	// Gradient call also be read directly from x ...
+	var grads Nodes
+	grads, err = Grad(z, x, y)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -115,11 +117,22 @@ func TestSymbolicDiff(t *testing.T) {
 	}
 	fmt.Printf("dz/dx: %v\n", xgrad)
 
+	// Check that direct access to grads gives the same value as above ...
+	if xg := grads[0].Value(); xg != xgrad {
+		fmt.Printf("dz/dx has different values %v and %v\n", xgrad, xg)
+		t.FailNow()
+	}
+
 	ygrad, err := y.Grad()
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("dz/dy: %v\n", ygrad)
+
+	if yg := grads[1].Value(); yg != ygrad {
+		fmt.Printf("dz/dy has different values %v and %v\n", ygrad, yg)
+		t.FailNow()
+	}
 
 	// Writing graph as dot file
 	ioutil.WriteFile("basic_symbolicdiff.dot", []byte(g.ToDot()), 0644)

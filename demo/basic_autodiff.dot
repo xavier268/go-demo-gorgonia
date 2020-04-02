@@ -2,15 +2,15 @@ digraph fullGraph {
 	nodesep=1;
 	rankdir=TB;
 	ranksep="1.5 equally";
-	Node_0xc0000b7340:Node_0xc0000b7340:anchor->Node_0xc0000b7180:Node_0xc0000b7180:anchor[ labelfloat=false, taillabel=" 0 " ];
-	Node_0xc0000b7340:Node_0xc0000b7340:anchor->Node_0xc0000b7260:Node_0xc0000b7260:anchor[ labelfloat=false, taillabel=" 1 " ];
+	Node_0xc0000c5340:Node_0xc0000c5340:anchor->Node_0xc0000c5180:Node_0xc0000c5180:anchor[ labelfloat=false, taillabel=" 0 " ];
+	Node_0xc0000c5340:Node_0xc0000c5340:anchor->Node_0xc0000c5260:Node_0xc0000c5260:anchor[ labelfloat=false, taillabel=" 1 " ];
 	outsideRoot->insideInputs[ constraint=false, style=invis, weight=999 ];
 	outsideExprG->insideExprG[ constraint=false, style=invis, weight=999 ];
 	outsideRoot->outsideExprG[ constraint=false, style=invis, weight=999 ];
 	insideInputs->insideExprG[ constraint=false, style=invis, weight=999 ];
 	subgraph cluster_expressionGraph {
 	label=expressionGraph;
-	Node_0xc0000b7340 [ fontname=monospace, label=<
+	Node_0xc0000c5340 [ fontname=monospace, label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" PORT="anchor"  COLOR="#FF0000;" >
 
 <TR><TD>2</TD><TD>⊙ false(%0, %1) :: float64</TD></TR>
@@ -19,7 +19,7 @@ digraph fullGraph {
 <TR><TD>Overwrites Input -1</TD><TD>Data On: CPU</TD></TR>
 <TR><TD>Value</TD><TD>Grad</TD></TR>
 <TR><TD>float64   5</TD><TD>float64   1 </TD></TR>
-<TR><TD>Ptr: 0x824634949496x </TD><TD>Ptr: 0xc00012bf80 </TD></TR>
+<TR><TD>Ptr: 0x824635318384x </TD><TD>Ptr: 0xc000186078 </TD></TR>
 
 
 </TABLE>
@@ -32,7 +32,7 @@ digraph fullGraph {
 	rank=max;
 	subgraph cluster_inputs {
 	label=inputs;
-	Node_0xc0000b7180 [ fontname=monospace, label=<
+	Node_0xc0000c5180 [ fontname=monospace, label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" PORT="anchor"  COLOR="#00FF00;" BGCOLOR="lightyellow">
 
 <TR><TD>0</TD><TD>x :: float64</TD></TR>
@@ -41,12 +41,12 @@ digraph fullGraph {
 <TR><TD>Overwrites Input -1</TD><TD>Data On: CPU</TD></TR>
 <TR><TD>Value</TD><TD>Grad</TD></TR>
 <TR><TD>float64   2</TD><TD>float64 2.5 </TD></TR>
-<TR><TD>Ptr: 0x824634949440x </TD><TD>Ptr: 0xc00012bf98 </TD></TR>
+<TR><TD>Ptr: 0x824635055520x </TD><TD>Ptr: 0xc000186090 </TD></TR>
 
 
 </TABLE>
 >, shape=none ];
-	Node_0xc0000b7260 [ fontname=monospace, label=<
+	Node_0xc0000c5260 [ fontname=monospace, label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" PORT="anchor"  COLOR="#00FF00;" BGCOLOR="lightyellow">
 
 <TR><TD>1</TD><TD>y :: float64</TD></TR>
@@ -55,7 +55,7 @@ digraph fullGraph {
 <TR><TD>Overwrites Input -1</TD><TD>Data On: CPU</TD></TR>
 <TR><TD>Value</TD><TD>Grad</TD></TR>
 <TR><TD>float64 2.5</TD><TD>float64   2 </TD></TR>
-<TR><TD>Ptr: 0x824634949448x </TD><TD>Ptr: 0xc00012bfa8 </TD></TR>
+<TR><TD>Ptr: 0x824635055528x </TD><TD>Ptr: 0xc0001860a0 </TD></TR>
 
 
 </TABLE>
